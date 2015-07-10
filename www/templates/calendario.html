@@ -1,0 +1,16 @@
+<ion-view title="Calendário">
+  <ion-content>
+    <ion-list ng-repeat="mes in vm.calendario">
+      <div class="titulo-wrapper">
+        <span class="titulo">{{mes.nome}}</span>
+      </div>
+      <ion-item class="item-thumbnail-left" ng-repeat="evento in mes.eventos">
+        <img ng-src="{{evento.imagem}}"/>
+        <h2 style="float: right; color: #454545; font-weight: bold">{{evento.dias}}</h2>
+        <h2>{{evento.nome}}</h2>
+        <p>{{evento.descricao}}</p>
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
