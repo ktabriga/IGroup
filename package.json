@@ -1,7 +1,7 @@
 {
-  "name": "grin",
-  "version": "1.0.0",
-  "description": "grin: An Ionic project",
+  "name": "StartupWeekend",
+  "version": "0.0.1",
+  "description": "Aplitivo para grupos, desenvolvido no Startup Weekend.",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-babel": "^5.1.0",

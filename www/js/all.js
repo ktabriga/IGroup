@@ -1,83 +1,3 @@
-define('Chats', ['exports'], function (exports) {
-  'use strict';
-
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  });
-  exports.Chats = Chats;
-
-  function Chats() {
-    // Might use a resource here that returns a JSON array
-
-    // Some fake testing data
-    var chats = [{
-      id: 0,
-      name: 'Ben Catabrigas',
-      lastText: 'You on your way?',
-      face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-    }, {
-      id: 1,
-      name: 'Max Lynx',
-      lastText: 'Hey, it\'s me',
-      face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
-    }, {
-      id: 2,
-      name: 'Adam Bradleyson',
-      lastText: 'I should buy a boat',
-      face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
-    }, {
-      id: 3,
-      name: 'Perry Governor',
-      lastText: 'Look at my mukluks!',
-      face: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png'
-    }, {
-      id: 4,
-      name: 'Mike Harrington',
-      lastText: 'This is wicked good ice cream.',
-      face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
-    }];
-
-    return {
-      all: function all() {
-        return chats;
-      },
-      remove: function remove(chat) {
-        chats.splice(chats.indexOf(chat), 1);
-      },
-      get: function get(chatId) {
-        for (var i = 0; i < chats.length; i++) {
-          if (chats[i].id === parseInt(chatId)) {
-            return chats[i];
-          }
-        }
-        return null;
-      }
-    };
-  }
-});
-define("ChatsCtrl", ["exports"], function (exports) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.ChatsCtrl = ChatsCtrl;
-  ChatsCtrl.$inject = ["$scope", "Chats"];
-
-  function ChatsCtrl($scope, Chats) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    $scope.$on("$ionicView.enter", function (e) {});
-
-    $scope.chats = Chats.all();
-    $scope.remove = function (chat) {
-      return Chats.remove(chat);
-    };
-  }
-});
 define("Rotas", ["exports"], function (exports) {
   "use strict";
 
@@ -89,63 +9,147 @@ define("Rotas", ["exports"], function (exports) {
 
   function Rotas($stateProvider, $urlRouterProvider) {
 
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
-    $stateProvider
-
-    // setup an abstract state for the tabs directive
-    .state("tab", {
-      url: "/tab",
+    $stateProvider.state("menu", {
+      url: "",
       abstract: true,
-      templateUrl: "templates/tabs.html"
-    })
-
-    // Each tab has its own nav history stack:
-
-    .state("tab.dash", {
-      url: "/dash",
+      templateUrl: "templates/menu.html",
+      controller: "menuCtrl as vm"
+    }).state("menu.calendario", {
+      url: "/calendario",
       views: {
-        "tab-dash": {
-          templateUrl: "templates/tab-dash.html",
-          controller: "DashCtrl"
+        content: {
+          templateUrl: "templates/calendario.html",
+          controller: "calendarioCtrl as vm"
         }
       }
-    }).state("tab.chats", {
-      url: "/chats",
+    }).state("menu.fotos", {
+      url: "/fotos",
       views: {
-        "tab-chats": {
-          templateUrl: "templates/tab-chats.html",
-          controller: "ChatsCtrl"
+        content: {
+          templateUrl: "templates/fotos.html",
+          controller: "fotosCtrl as vm"
         }
       }
-    }).state("tab.chat-detail", {
-      url: "/chats/:chatId",
+    }).state("menu.sobre", {
+      url: "/sobre",
       views: {
-        "tab-chats": {
-          templateUrl: "templates/chat-detail.html",
-          controller: "ChatDetailCtrl"
-        }
-      }
-    }).state("tab.account", {
-      url: "/account",
-      views: {
-        "tab-account": {
-          templateUrl: "templates/tab-account.html",
-          controller: "AccountCtrl"
+        content: {
+          templateUrl: "templates/sobre.html"
         }
       }
     });
 
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise("/tab/dash");
+    $urlRouterProvider.otherwise("/calendario");
   }
 });
-define("app", ["exports", "ChatsCtrl", "Chats", "Rotas"], function (exports, _ChatsCtrl, _Chats, _Rotas) {
+define("menu.controller", ["exports"], function (exports) {
   "use strict";
 
-  angular.module("grin", ["ionic"]).run(function ($ionicPlatform) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.controller = controller;
+
+  function controller() {}
+});
+define("fotos/fotos.controller", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.controller = controller;
+
+  function controller() {}
+});
+define("fotos/modulo", ["exports", "./fotos.controller"], function (exports, _fotosController) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var modulo = "fotos";
+
+  exports.modulo = modulo;
+  angular.module(modulo, []).controller("fotosCtrl", _fotosController.controller);
+});
+define("calendario/calendario.controller", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.controller = controller;
+
+  function controller(calendarioResource) {
+    var vm = this;
+
+    var p = calendarioResource.buscar().then(function (calendario) {
+      return vm.calendario = calendario;
+    });
+  }
+});
+define("calendario/calendario.resource", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.resource = resource;
+
+  function resource() {
+    var calendario = [{
+      nome: "agosto/2015",
+      eventos: [{
+        nome: "Startup Weekend",
+        descricao: "Descrição superficial deste evento.",
+        imagem: "img/fotoEvento.png",
+        dias: "10"
+      }, {
+        nome: "Festa beneficiente",
+        descricao: "Em algum lugar por ai.",
+        imagem: "img/fotoEvento.png",
+        dias: "11 - 13"
+      }]
+    }, {
+      nome: "setemrbo/2015",
+      eventos: [{
+        nome: "Startup Weekend",
+        descricao: "Descrição superficial deste evento.",
+        imagem: "img/fotoEvento.png",
+        dias: "10"
+      }, {
+        nome: "Festa beneficiente",
+        descricao: "Em algum lugar por ai.",
+        imagem: "img/fotoEvento.png",
+        dias: "11 - 13"
+      }]
+    }];
+
+    return {
+      buscar: function buscar() {
+        return new Promise(function (resolve) {
+          return resolve(calendario);
+        });
+      }
+    };
+  }
+});
+define("calendario/modulo", ["exports", "calendario/calendario.controller", "calendario/calendario.resource"], function (exports, _calendarioCalendarioController, _calendarioCalendarioResource) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var modulo = "calendario";
+
+  exports.modulo = modulo;
+  angular.module(modulo, []).controller("calendarioCtrl", _calendarioCalendarioController.controller).factory("calendarioResource", _calendarioCalendarioResource.resource);
+});
+define("app", ["exports", "menu.controller", "calendario/modulo", "fotos/modulo", "Rotas"], function (exports, _menuController, _calendarioModulo, _fotosModulo, _Rotas) {
+  "use strict";
+
+  angular.module("IGroup", ["ionic", _calendarioModulo.modulo, _fotosModulo.modulo]).run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
 
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -155,12 +159,6 @@ define("app", ["exports", "ChatsCtrl", "Chats", "Rotas"], function (exports, _Ch
         StatusBar.styleLightContent();
       }
     });
-  }).controller("DashCtrl", function () {}).controller("ChatsCtrl", _ChatsCtrl.ChatsCtrl).controller("ChatDetailCtrl", function ($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
-  }).controller("AccountCtrl", function ($scope) {
-    $scope.settings = {
-      enableFriends: true
-    };
-  }).factory("Chats", _Chats.Chats).config(_Rotas.Rotas);
+  }).controller("menuCtrl", _menuController.controller).config(_Rotas.Rotas);
 });
 //# sourceMappingURL=all.js.map

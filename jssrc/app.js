@@ -1,8 +1,9 @@
-import {ChatsCtrl} from "ChatsCtrl";
-import {Chats} from "Chats";
+import {controller as menuCtrl} from "menu.controller";
+import {modulo as calendario} from "calendario/modulo";
+import {modulo as fotos} from "fotos/modulo";
 import {Rotas} from "Rotas";
 
-angular.module('grin', ['ionic'])
+angular.module('IGroup', ['ionic', calendario, fotos])
   .run($ionicPlatform => {
     $ionicPlatform.ready(function() {
      
@@ -15,18 +16,5 @@ angular.module('grin', ['ionic'])
     });
 
   })
-  .controller('DashCtrl', () => {})
-  .controller('ChatsCtrl', ChatsCtrl)
-
-.controller('ChatDetailCtrl', ($scope, $stateParams, Chats) => {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', $scope => {
-  $scope.settings = {
-    enableFriends: true
-  };
-})
-
-.factory('Chats', Chats)
-.config(Rotas);
+  .controller("menuCtrl", menuCtrl)
+  .config(Rotas);

@@ -2,61 +2,36 @@ Rotas.$inject = ["$stateProvider", "$urlRouterProvider"];
 
 export function Rotas($stateProvider, $urlRouterProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
-
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: "/tab",
+  $stateProvider.state("menu", {
+    url: "",
     abstract: true,
-    templateUrl: "templates/tabs.html"
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.dash', {
-    url: '/dash',
-    views: { 
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+    templateUrl: "templates/menu.html",
+    controller: "menuCtrl as vm"
+  }).state("menu.calendario", {
+    url: "/calendario",
+    views: {
+      content: {
+        templateUrl: "templates/calendario.html",
+        controller: "calendarioCtrl as vm"
       }
     }
-  })
-
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
-    url: '/account',
+  }).state("menu.fotos", {
+    url: "/fotos",
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      content: {
+        templateUrl: "templates/fotos.html",
+        controller: "fotosCtrl as vm"
+      }
+    }
+  }).state("menu.sobre", {
+    url: "/sobre",
+    views: {
+      content: {
+        templateUrl: "templates/sobre.html"
       }
     }
   });
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/calendario');
 
 }

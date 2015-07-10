@@ -1,1 +1,52 @@
 /* Empty. Add your own CSS if you like */
+
+span.titulo {
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.titulo-wrapper{
+    text-align: center;
+    width: 100%;
+    background-color: #00b4ea;
+    color: #fff;
+    padding: 5px;
+    margin: 0;
+}
+
+
+
+.card.card-image  {
+    position: relative;
+    padding: 0;
+}
+
+
+.card.card-image img {
+    margin: 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 2px 2px 0 0;
+}
+
+.card > .card-content {
+    padding: 7px;
+    border-radius: 0 0 2px 2px;
+}
+.card > .card-content  span {
+    color: #0097d5;
+}
+
+
+
+.car.card-content p {
+    margin: 0;
+    color: inherit;
+}
+
